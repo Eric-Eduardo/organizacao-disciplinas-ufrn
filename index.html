@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Organização de horários</title>
+    <link rel="stylesheet" href="style.css">
+
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="toast.css">
+    <link href="selectInput.css" rel='stylesheet'>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+</head>
+
+<body>
+    <div class="toasts-content">
+
+    </div>
+    <main>
+        <div id="form-subject" class="hidden-form">
+            <div class="content-form">
+                <form>
+                    <h2>Adicionar Disciplina</h2>
+                    <div>
+                        <label for="name">Nome da matéria</label>
+                        <input required type="text" name="name" id="name">
+                    </div>
+                    <div>
+                        <label for="code">Código</label>
+                        <input type="text" name="code" id="code">
+                    </div>
+                    <div>
+                        <label for="workload">Carga horária</label>
+                        <input type="number" name="workload" id="workload">
+                    </div>
+                    <input hidden type="text" name="idSubject" id="idSubject">
+                    <div>
+                        <button type="submit" class="btn bg-green" id="submit-subject-form">Salvar</button>
+                        <button type="reset" class="btn bg-blue" id="cancel-subject-form">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div id="form-class" class="hidden-form">
+            <div class="content-form">
+                <form>
+                    <h2>Adicionar Turma</h2>
+                    <h4>NOME DA MATÉRIA</h4>
+                    <div>
+                        <label for="location">Local</label>
+                        <input type="text" name="location" id="location">
+                    </div>
+                    <div>
+                        <label for="timetable">Horário</label>
+                        <input require type="text" name="timetable" id="timetable">
+                    </div>
+                    <div>
+                        <label for="professor">Professor</label>
+                        <input type="text" name="professor" id="professor">
+                    </div>
+                    <input hidden type="text" name="idClasse" id="idClasse">
+                    <input hidden type="text" name="idSubjectClasse" id="idSubjectClasse">
+                    <div>
+                        <button type="submit" class="btn bg-green" id="submit-class-form">Salvar</button>
+                        <button type="reset" class="btn bg-blue" id="cancel-class-form">Cancelar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <section>
+            <h2 class="title">Disciplinas</h2>
+
+            <table id="table-disciplinas">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Horário</th>
+                        <th>Professor</th>
+                        <th>Local</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+            <button id="btn-add-subject" class="btn bg-blue">
+                + Adicionar disciplina
+            </button>
+            <button onclick="get_timetables()" class="btn bg-blue" id="create-table-disciplinas">Criar Tabela de
+                Horários</button>
+            <button class="btn bg-green btn-salvar">Salvar</button>
+        </section>
+
+        <section>
+            <h2 class="title">Turmas selecionadas</h2>
+
+            <table id="selected-classes">
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Nome</th>
+                        <th>Horário</th>
+                        <th>Professor</th>
+                        <th>Local</th>
+                        <th>CH</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </section>
+
+        <section>
+            <h2 class="title">Horários</h2>
+            <div class="filters">
+                <p class="filter-title">Organização da tabela</p>
+                <div class="contentItem">
+                    <div class="item">
+                        <input type="checkbox" name="includeSaturdayCheck" id="includeSaturdayCheck">
+                        <label for="includeSaturdayCheck">Incluir o sábado na tabela</label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="substituteTimesCheck" id="substituteTimesCheck">
+                        <label for="substituteTimesCheck">Substituir o horário pelo nome (M1, M2, M3, ...) </label>
+                    </div>
+                </div>
+            </div>
+            <div class="filters">
+                <p class="filter-title">Escolha automática</p>
+                <div class="contentItem">
+                    <div class="item">
+                        <input type="checkbox" name="automaticSelection" id="automaticSelectionCheck">
+                        <label for="automaticSelectionCheck">Permitir que o programa mostre sugestões de
+                            horários</label>
+                    </div>
+                </div>
+                <div class="hidden">
+                    <div class="contentItem">
+                        <div class="item">
+                            <div class="selectInput">
+                                <div class="selectInput_clicker">
+                                    <i class='bx bx-chevron-down'></i>
+                                    Selecionar matérias
+                                </div>
+                                <div class="contentSelectInput">
+                                    <ul>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="contentItem">
+                        <div class="item">
+                            <input type="number" name="minNumberSubjects" id="minNumberSubjects" min="1" value="3">
+                            <label for="minNumberSubjects">N° mínimo de matérias</label>
+                        </div>
+                        <div class="item">
+                            <input type="number" name="maxNumberSubjects" id="maxNumberSubjects" min="1" value="6">
+                            <label for="maxNumberSubjects">N° máximo de matérias</label>
+                        </div>
+                    </div>
+                    <div class="contentItem">
+                        <button class="confirmFilter btn bg-green">
+                            Confirmar
+                        </button>
+                    </div>
+                    <div class="contentItem carousselContent">
+                        <div class="item caroussel" id="automaticSelectionCaroussel">
+                            <button class="previous"><i class='bx bx-chevron-left' ></i></button>
+                            <p class="page-indicator"><span class="current-page-indicator">0</span>/<span
+                                    class="total-pages-indicator">0</span></p>
+                            <button class="next"><i class='bx bx-chevron-right'></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <table id="table-horarios">
+
+            </table>
+            <button class="btn bg-blue" onclick="doCapture()">Exportar Tabela</button>
+        </section>
+
+    </main>
+
+    <script src="./toast.js"></script>
+    <script src="main.js"></script>
+    <script src="capture_table.js"></script>
+    <script src="./selecao_automatica.js"></script>
+    <script src="selectInput.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,49 @@
+.selectInput {
+    border: 1px solid #dbdbdb;
+    border-radius: 4px;
+    padding: 3px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.selectInput .selectInput_clicker {
+    cursor: pointer;
+}
+
+.selectInput .contentSelectInput {
+    margin-top: 10px;
+    display: none;
+}
+
+.selectInput .contentSelectInput ul li {
+    /* padding: 3px 0; */
+    margin: 5px 0px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    /* background-color: aqua; */
+}
+
+.selectInput .contentSelectInput ul li span {
+    /* display: flex; */
+    height: min-content;
+}
+
+.selectInput .contentSelectInput ul li button {
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+    border-radius: 100%;
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+.selectInput .contentSelectInput ul li button.add {
+    color: #139dff;
+    background-color: #139dff40;
+}
+.selectInput .contentSelectInput ul li button.remove {
+    color: #E53935;
+    background-color: #E5393540;
+}

@@ -1,0 +1,292 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-family: 'verdana', sans-serif;
+}
+:root {
+    cor-cabecalho: "#5572cb";
+}
+body {
+    display: flex;
+    justify-content: center;
+}
+
+main {
+    width: 70%;
+}
+
+main section {
+    margin: 20px 0 50px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 11px;
+    margin: 7px 0 20px;
+}
+
+table th {
+    text-align: left;
+    background-color: #5b79c4;
+    color: white;
+}
+
+table td, table th {
+    padding: 7px;
+}
+table tr:nth-child(even) {
+    background-color: #ffffff;
+}
+table tr:nth-child(odd) {
+    background-color: #e0edf8;
+}
+
+table tr.merged-line {
+    background-color: #b0c6ff;    
+    margin: 10px;
+
+}
+
+table tr.merged-line td {
+    /* margin: 10px; */
+}
+
+
+.actions-table {
+    display: flex;
+    gap: 1rem;
+}
+
+#table-disciplinas thead th:last-child {
+    width: 100px;
+}
+
+.subject-content {
+    margin-bottom: 10px;
+}
+
+.btn {
+    border-radius: 3px;
+    padding: 5px 10px;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 13px;
+}
+
+.bg-red {
+    background-color: #cc2929;
+}
+
+.bg-blue {
+    background-color: #5b79c4;
+}
+
+.bg-green {
+    background-color:  #73cc4d;
+}
+
+.btn:hover {
+    opacity: 87%;
+    cursor: pointer;
+}
+
+table#table-horarios {
+    table-layout: fixed;
+    color: #2a4fae;
+    /* color: #ae2a2a; */
+}
+
+/* table#table-horarios td{
+    height: 30px;
+    color: #2a4fae;
+} */
+
+table#table-horarios th,  table#table-horarios td {
+    text-align: center;
+}
+
+table#table-horarios tr td:first-child {
+    font-weight: bold;
+    color: #5b79c4;
+    /* margin-top: 10px; */
+}
+
+table#table-horarios tr td:not(:first-child) {
+    border-left: 1px solid #d9edfc;
+    text-align: center;
+    /* color: #2a4fae; */
+}
+
+/* table#table-horarios tr:not(:first-child){
+    height: 53px;
+} */
+
+input[type="radio"] {
+    height: 15px;
+    width: 15px;
+}
+
+input[type="radio"]:hover {
+    cursor: pointer;
+}
+
+table#table-horarios td.conflict {
+    background-color: rgba(255, 124, 124, 0.3);
+}
+
+.hidden-form {
+    z-index: 5;
+    position: fixed;
+    background-color: #00000071;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+}   
+
+.hidden-form .content-form {
+    width: 400px;
+    padding: 50px;
+    border-radius: 12px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.hidden-form form{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.hidden-form form div {
+    display: flex;
+    flex-direction: column;
+    
+}
+
+form input {
+    border: none;
+    border-radius: 5px;
+    background-color: #dedede;
+    padding: 7px;
+    font-size: 11px;
+}
+
+input:focus {
+    outline: 1px solid #5b79c4;
+}
+
+
+/* 
+table#table-horarios .turno-M {
+    background-color: #f7f9ff;
+}
+table#table-horarios .turno-T {
+    background-color: #e2e9ff;
+}
+table#table-horarios .turno-N {
+    background-color: #c9d6ff;
+} */
+
+/* table#table-horarios tr:nth-child(4n) {
+    border-bottom: 5px solid black;
+} */
+ 
+table#table-horarios tr.margin-bottom {
+    border-bottom: 5px solid #5b79c4;
+    /* : 10px; */
+}
+
+table#table-horarios th:first-child {
+    width: 30px;
+} 
+
+
+.filters {
+    z-index: 0;
+    padding: 12px 10px 10px 10px;
+    /* background-color: #e1e1e1; */
+    border: 1px solid rgb(219, 219, 219);
+    border-radius: 7px;
+    margin: 12px 0 15px 0;
+    position: relative;
+}
+
+.filters .contentItem{
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.filters .contentItem:not(:last-child) {
+    margin-bottom: 15px;
+}
+
+.filters .caroussel {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+
+.filters .item {
+    width: 100%;
+    font-size: 12px;
+}
+
+.filter-title {
+    position: absolute;
+    top: -8px;
+    font-size: 12px;
+    color: gray;
+    background-color: white;
+}
+
+.filters input[type="number"] {
+    width: 30px;
+    border: 1px solid #dbdbdb;
+    /* background-color: #efefef; */
+    border-radius: 4px;
+    padding: 2px 4px;
+}
+
+.filter .contentItem {
+    visibility: hidden;
+    display: none;
+    background-color: #2a4fae;
+}
+ 
+
+.filters .hidden {
+    display: none;
+}
+
+#automaticSelectionCaroussel button {
+    background-color: #139dff;
+    border: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 100%;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#automaticSelectionCaroussel .page-indicator {
+    padding: 3px 7px;
+    background-color: #139dff52;
+    border-radius: 4px;
+    display: flex;
+    gap: 4px;
+}
