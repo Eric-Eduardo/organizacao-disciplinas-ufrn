@@ -2,19 +2,21 @@
 let allCombinationsOfSubjects = [];
 let currentIndexSubject = 0;
 let selectedSubjectsFilter = [];
+let shiftFilter = []; // Contém os turnos em que não deve ter matérias
 let minNumSubjects = 3;
 let maxNumSubjects = 6;
 
 
-document.getElementById('minNumberSubjects').addEventListener('change', () => {
-    minNumSubjects = Number(document.getElementById('minNumberSubjects').value)
-})
-
-document.getElementById('maxNumberSubjects').addEventListener('change', () => {
-    maxNumSubjects = Number(document.getElementById('maxNumberSubjects').value);
-})
-
 document.querySelector('.filters .confirmFilter').addEventListener('click', () => {
+    minNumSubjects = Number(document.getElementById('minNumberSubjects').value);
+    maxNumSubjects = Number(document.getElementById('maxNumberSubjects').value);
+
+    console.log(minNumSubjects, maxNumSubjects);
+    if (minNumSubjects > maxNumSubjects) {
+        show_error_card("Não foi encontrado uma combinação que satisfaz os filtros");
+        return;
+    } 
+    getShiftFilters();
     allCombinationsOfSubjects = [];
     getCombinationsSubjects(subjects, minNumSubjects, maxNumSubjects);
 
@@ -57,6 +59,15 @@ document.querySelector('#automaticSelectionCaroussel .previous').addEventListene
         document.querySelector("#automaticSelectionCaroussel .current-page-indicator").innerText = currentIndexSubject + 1;
     }
 })
+
+
+function getShiftFilters() {
+    shiftFilter = [];
+    if (!document.getElementById('morningShiftCheckbox').checked) shiftFilter.push("M");
+    if (!document.getElementById('afternoonShiftCheckbox').checked) shiftFilter.push("T");
+    if (!document.getElementById('nightShiftCheckbox').checked) shiftFilter.push("N");
+    console.log(shiftFilter);
+}
 
 function hasConflict(listTimetables) {
     let listSeparateItems = [];
@@ -121,7 +132,6 @@ function getCombinationsSubjects(arr, minSize, maxSize) {
 
     let result = [];
     combine([], 0);
-    console.log(allCombinationsOfSubjects);
     // console.log("Oxi");
     // filterCombinationSubjects();
     // return result;
@@ -129,18 +139,21 @@ function getCombinationsSubjects(arr, minSize, maxSize) {
 function getCombinationsClasses(groups) {
     function combine(index, prefix) {
         if (index === groups.length) {
-            if (!hasConflict(prefix.map((element) => subjects[element[0]].classes[element[1]].timetable.join(' '))))
-                allCombinationsOfSubjects.push(prefix);
-            return;
+            let timetablesList = prefix.map((element) => subjects[element[0]].classes[element[1]].timetable.join(' '));
+            if (shiftFilter.every((item) => !timetablesList.join('').includes(item))) {
+                if (!hasConflict(timetablesList))
+                    allCombinationsOfSubjects.push(prefix);
+                return;
+            } else {
+                return;
+            }
         }
         for (let item in subjects[groups[index]].classes) {
             combine(index + 1, [...prefix, [groups[index], Number(item)]]);
         }
     }
 
-    let result = [];
     combine(0, []);
-    // return result;
 }
 
 // Seleciona um conjunto de turmas de allCombinationsOfSubjects
