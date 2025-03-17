@@ -112,6 +112,7 @@
 
                 </tbody>
             </table>
+            <button class="btn bg-blue" onclick="doCaptureSelectedClasses()">Exportar Tabela de Turmas</button>
         </section>
 
         <section>
@@ -126,6 +127,10 @@
                     <div class="item">
                         <input type="checkbox" name="substituteTimesCheck" id="substituteTimesCheck">
                         <label for="substituteTimesCheck">Substituir o horário pelo nome (M1, M2, M3, ...) </label>
+                    </div>
+                    <div class="item">
+                        <input type="checkbox" name="includeSelectedClasses" id="includeSelectedClasses">
+                        <label for="includeSelectedClasses">Inclur a tabela "turmas selecionadas" ao exportar a tabela de horários</label>
                     </div>
                 </div>
             </div>
